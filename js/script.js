@@ -1,4 +1,6 @@
 import $ from 'jquery'
+import bird from '../images/bird.jpg'
+import squirrel from '../images/squirrel.jpg'
 
 $(document).ready(function () {
 	// when a hanburger menu is clicked
@@ -11,3 +13,5 @@ $(document).ready(function () {
 	}); // end click event handler
 });
 
+$('#image_bird').attr("src", bird);
+$('#image_spuirrel').attr("src", squirrel);
