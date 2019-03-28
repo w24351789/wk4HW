@@ -1,6 +1,9 @@
 import $ from 'jquery'
 import bird from '../images/bird.jpg'
 import squirrel from '../images/squirrel.jpg'
+import '../css/style.css'
+import '../css/normalize.css'
+import '../css/fonts'
 
 $(document).ready(function () {
 	// when a hanburger menu is clicked
