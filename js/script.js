@@ -1,4 +1,4 @@
-let $ = require('jquery')
+import $ from 'jquery'
 
 $(document).ready(function () {
 	// when a hanburger menu is clicked
@@ -10,3 +10,4 @@ $(document).ready(function () {
 		$ul.toggleClass("menu-click");
 	}); // end click event handler
 });
+
