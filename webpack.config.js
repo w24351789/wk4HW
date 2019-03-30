@@ -37,10 +37,34 @@ module.exports = {
                 },
                 'image-webpack-loader'
             ]
-        }]
+        },{
+            test: /\.(eot|ttf|svg)$/,
+            use: [
+                {
+                    loader: 'file-loader?prefix=font/',
+                    options:{
+                        outputPath: './css/fonts'
+                    }
+                }
+            ]
+			
+		}, {
+            test: /\.woff/,
+            use: [
+                {
+                    loader: 'file-loader?prefix=font',
+                    options:{
+                        outputPath: './css/fonts',
+                        limit:10000,
+                        mimetype:'application/font-woff'
+                    }
+                }
+            ]
+			
+		}]
     },
     plugins: [
-        new ExtractTextPlugin('./css/style.css'),
+        new ExtractTextPlugin('css/style.css'),
         new HtmlWebPackPlugin({template: './index.html'})
     ]
 
