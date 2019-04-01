@@ -1,12 +1,13 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     entry: './js/script.js',
     output: {
         path: path.join(__dirname, './dist'),
         filename: 'bundle.[chunkhash].js',
-        publicPath: './dist'
+        // publicPath: '/'
     },
     module: {
         rules: [{
@@ -20,10 +21,16 @@ module.exports = {
             }
         },
         {
+            test: /\.css$/,
             use: ExtractTextPlugin.extract({
-                use: 'css-loader'
-            }),
-            test: /\.css$/
+                use:[ {
+                    loader: 'css-loader',
+                    options: {
+                        url: false
+                    }
+                }]
+            
+        })
         },
         {
             test: /\.(jpe?g|png|gif|svg)$/,
@@ -37,35 +44,15 @@ module.exports = {
                 },
                 'image-webpack-loader'
             ]
-        },{
-            test: /\.(eot|ttf|svg)$/,
-            use: [
-                {
-                    loader: 'file-loader?prefix=font/',
-                    options:{
-                        outputPath: './css/fonts'
-                    }
-                }
-            ]
-			
-		}, {
-            test: /\.woff/,
-            use: [
-                {
-                    loader: 'file-loader?prefix=font',
-                    options:{
-                        outputPath: './css/fonts',
-                        limit:10000,
-                        mimetype:'application/font-woff'
-                    }
-                }
-            ]
-			
-		}]
+        }]
     },
     plugins: [
         new ExtractTextPlugin('css/style.css'),
-        new HtmlWebPackPlugin({template: './index.html'})
-    ]
+        new HtmlWebPackPlugin({template: './index.html'}),
+        new CopyWebpackPlugin([{from: 'css/fonts', to: 'css/fonts'}])
+    ],
+    devServer: {
+        contentBase: 'dist'
+    }
 
 }
